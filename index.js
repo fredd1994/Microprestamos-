@@ -14,6 +14,7 @@ const jsonParser = bodyParser.json();
 const Validator = require('validatorjs');
 Validator.useLang('es');
 var http = require(`http`);
+var port = process.env.PORT || 8080;
 //var port = normalizePort(process.env,PORT || 3000);
 //var server = http.createServer(app);
 //app.set(`port`,port);
