@@ -14,9 +14,9 @@ const jsonParser = bodyParser.json();
 const Validator = require('validatorjs');
 Validator.useLang('es');
 var http = require(`http`);
-var port = normalizePort(process.env,PORT || 3000);
-var server = http.createServer(app);
-app.set(`port`,port);
+//var port = normalizePort(process.env,PORT || 3000);
+//var server = http.createServer(app);
+//app.set(`port`,port);
 router.get('/', function(req, res) {
   res.send("Hello get!");
 });
