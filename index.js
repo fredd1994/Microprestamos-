@@ -33,7 +33,7 @@ const swaggerObtions ={
 }
 
 const swaggerDocs = swaggerJsDoc(swaggerObtions);
-app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use('/api-documentation',swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 Validator.useLang('es');
 
