@@ -48,7 +48,7 @@ Validator.useLang('es');
  *        description: A successful response
  */
 router.get('/', function(req, res) {
-  res.status(200).send("Customer Calcular cuota");
+  res.status(200).send("Calcular cuota");
 });
 
 router.post('/loan_cuota',jsonParser, function(req, res) {
