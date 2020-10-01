@@ -16,7 +16,7 @@ const port = process.env.PORT || 8080;
 
 Validator.useLang('es');
 
-router.get('/', function(req, res) {
+router.get('/loand_cuota', function(req, res) {
   res.send("Calcular cuouta");
 });
 
