@@ -1,25 +1,23 @@
-var express = require("express"),
+  var express = require("express"),
     app = express(),
     bodyParser  = require("body-parser"),
-    methodOverride = require("method-override");
-    mongoose = require('mongoose');
-   
+    methodOverride = require("method-override"),
+    http = require(`http`),
+    Validator = require('validatorjs'),
+    nodemailer = require('nodemailer');
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
-
 const router = express.Router();
 const jsonParser = bodyParser.json();
-const Validator = require('validatorjs');
+const port = process.env.PORT || 8080;
+
 Validator.useLang('es');
-var http = require(`http`);
-var port = process.env.PORT || 8080;
-//var port = normalizePort(process.env,PORT || 3000);
-//var server = http.createServer(app);
-//app.set(`port`,port);
-router.get('/', function(req, res) {
-  res.send("Hello get!");
+
+router.get('/loand_cuota', function(req, res) {
+  res.send("Calcular cuouta");
 });
 
 router.post('/',jsonParser, function(req, res) {
@@ -32,7 +30,8 @@ router.post('/',jsonParser, function(req, res) {
     "amount": "required|integer|min:100|max:2000",
     "frecuency": "string|in:mensual,quincenal",
     "payTime": "integer"
-}
+  }
+
   var name = req.body.name;
   var email= req.body.email;
   var totalIngress= req.body.totalIngress;
@@ -42,26 +41,19 @@ router.post('/',jsonParser, function(req, res) {
   var frecuency=req.body.frecuency || "mensual";
   var payTime= req.body.payTime || 3;
 
-
-
   let validation = new Validator(req.body, validationRules);
-  console.log(validation.passes());
-  console.log(validation.errors);
-
+ 
   if (validation.passes()) {
     
     var loan_quota = calculate_loan_quota(amount,18,payTime,frecuency).toFixed(2);
 
     var output = {
-     "amount"    :`$${amount}. `,
-
-      "text"      : `La cuota sería $${loan_quota} ${frecuency} durante ${payTime} meses. `,
+      "amount"    :`$${amount}.`,
+      "text"      : `La cuota sería $${loan_quota} ${frecuency} durante ${payTime} meses.`,
       "frecuency" : frecuency,
-      "paytime": `${payTime} meses.`
-
-      
+      "paytime"   : `${payTime} meses.`
    } 
-   var nodemailer = require('nodemailer');
+
    contentHTML = `
    <h1>User Information</h1>
    <ul>
@@ -74,9 +66,8 @@ router.post('/',jsonParser, function(req, res) {
        <li>Frecuency: ${frecuency}</li>
        <li>Pay Time: ${payTime}</li>
        <li>Loan Cuota: ${loan_quota}</li>
-   </ul>
-   
- `;
+   </ul>  
+  `;
  
    let transporter = nodemailer.createTransport({
      service: 'Gmail', // no need to set host or port etc.
@@ -89,7 +80,7 @@ router.post('/',jsonParser, function(req, res) {
    var mailOptions = {
      from: 'micropagos2020@gmail.com',
      to: 'fredd.a14@hotmail.com',
-     subject: 'Solicutud de nuevo credito',
+     subject: 'Solicutud de nuevo crédito',
      html : contentHTML
    };
    
@@ -97,7 +88,7 @@ router.post('/',jsonParser, function(req, res) {
      if (error) {
        console.log(error);
      } else {
-       console.log('Email sent: ' + info.response);
+       console.log(`Email sent:${info.response}` );
      }
    });
   } else {
