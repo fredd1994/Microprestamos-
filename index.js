@@ -37,11 +37,12 @@ app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 Validator.useLang('es');
 
+
 router.get('/', function(req, res) {
   res.send("Calcular cuouta");
 });
 
-router.post('/',jsonParser, function(req, res) {
+router.post('/loan_cuota',jsonParser, function(req, res) {
   const validationRules = {
     "name":"required|string", 
     "email": "required|email",
