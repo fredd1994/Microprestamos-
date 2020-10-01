@@ -13,6 +13,27 @@ app.use(methodOverride());
 const router = express.Router();
 const jsonParser = bodyParser.json();
 const port = process.env.PORT || 8080;
+const swaggerJsDoc = require(`swagger-jsdoc`);
+const swaggerUi = require(`swagger-ui-express`);
+const swaggerObtions ={
+  swaggerDefinitions:{
+    info:{
+      title: 'Microprestamos api',
+      description:  'API para calcular la cuota de un microprestamo que un cliente quiere solicitar y debe pagar mensualmente/quincenalmente .',
+      contact: {
+        name: 'Fredd',
+        url : 'No',
+        email: 'fredd.a14@hotmail.com'
+      },
+      servers: ["https://microprestamos.herokuapp.com/"]
+      
+    }
+  },
+  apis: ["index.js"]
+}
+
+const swaggerDocs = swaggerJsDoc(swaggerObtions);
+app.use('/api-docs',swaggerUi.serve, swaggerUi.setup{swaggerDocs});
 
 Validator.useLang('es');
 
