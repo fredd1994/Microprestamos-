@@ -16,7 +16,7 @@ const port = process.env.PORT || 8080;
 const swaggerJsDoc = require(`swagger-jsdoc`);
 const swaggerUi = require(`swagger-ui-express`);
 const swaggerObtions ={
-  swaggerDefinitions:{
+  swaggerDefinition:{
     info:{
       title: 'Microprestamos api',
       description:  'API para calcular la cuota de un microprestamo que un cliente quiere solicitar y debe pagar mensualmente/quincenalmente .',
