@@ -25,11 +25,11 @@ const swaggerObtions ={
         url : "No",
         email: "fredd.a14@hotmail.com"
       },
-      servers: ['https://microprestamos.herokuapp.com/']
+      servers: ["https://microprestamos.herokuapp.com/"]
       
     }
   },
-  apis: ['index.js']
+  apis: ["index.js"]
 }
 
 const swaggerDocs = swaggerJsDoc(swaggerObtions);
