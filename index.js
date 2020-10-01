@@ -117,7 +117,7 @@ router.post('/',jsonParser, function(req, res) {
 
 app.use(router);
 
-app.listen(3000, function() {
+app.listen(port, function() {
   console.log("Node server running on http://localhost:3000");
 });
 
