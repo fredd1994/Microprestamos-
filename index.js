@@ -16,11 +16,11 @@ const port = process.env.PORT || 8080;
 
 Validator.useLang('es');
 
-router.get('/', function(req, res) {
+router.get('/loand_cuota', function(req, res) {
   res.send("Calcular cuouta");
 });
 
-router.post('/loand_cuota',jsonParser, function(req, res) {
+router.post('/',jsonParser, function(req, res) {
   const validationRules = {
     "name":"required|string", 
     "email": "required|email",
