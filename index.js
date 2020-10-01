@@ -37,9 +37,18 @@ app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 Validator.useLang('es');
 
-
+// Routes
+/**
+ * @swagger
+ * /:
+ *  get:
+ *    description: Use to home page
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ */
 router.get('/', function(req, res) {
-  res.send("Calcular cuouta");
+  res.status(200).send("Customer Calcular cuota");
 });
 
 router.post('/loan_cuota',jsonParser, function(req, res) {
