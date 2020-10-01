@@ -13,8 +13,8 @@ app.use(methodOverride());
 const router = express.Router();
 const jsonParser = bodyParser.json();
 const port = process.env.PORT || 8080;
-const swaggerJsDoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 const swaggerObtions ={
   swaggerDefinition:{
     info:{
@@ -25,11 +25,11 @@ const swaggerObtions ={
         url : "No",
         email: "fredd.a14@hotmail.com"
       },
-      servers: ["https://microprestamos.herokuapp.com/"]
+      servers: ['https://microprestamos.herokuapp.com/']
       
     }
   },
-  apis: ["index.js"]
+  apis: ['index.js']
 }
 
 const swaggerDocs = swaggerJsDoc(swaggerObtions);
