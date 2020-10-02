@@ -55,96 +55,48 @@ app.get("/", (req, res) => {
 });
 
 /**
- * @swagger
- *  /loan_cuota:
- *    post:
- *      description: Calcula la cuota de un prestamo
- *      parameters:
- *      - name: name
- *        in: body
- *        description: Nombre del solicitante
- *        required: true
- *        schema:
- *          type: string
- *          format: string
- *          example: Daniel
- *      - name: email 
- *        in: body
- *        description: Email del solicitante
- *        required: true
- *        schema:
- *          type: string
- *          format: string
- *          example: daniel2020@gmail.com
- *      - name: totalIngress
- *        in: body
- *        description: Total de ingresos 
- *        required: true
- *        schema:
- *          type: number
- *          format: float
- *          example: 200000
- *      - name: sector
- *        in: body
- *        description: Sector al que pertece
- *        required: true
- *        schema:
- *          type: string
- *          format: string
- *          example: publico o privado 
- *      - name: workYears 
- *        in: body
- *        description: Años de trabajar
- *        required: true
- *        schema:
- *          type: integer
- *          format: int32
- *          example:  2
- *      - name: amount 
- *        in: body
- *        description: Monto a solicitar
- *        required: true
- *        schema:
- *          type: integer
- *          format: int32
- *          example:  2000
- *      - name: frecuency
- *        in: body
- *        description: Frencuencia a pagar del prestamo
- *        required: false
- *        schema:
- *          type: string
- *          format: string
- *          example:  mensual o quincenal
- *      - name: payTime 
- *        in: body
- *        description: Tiempo para pagar el prestamo en meses
- *        required: false
- *        schema:
- *          type: integer
- *          format: int32
- *          example: 24
- *          
- *          
- *      responses:
- *        200:
- *          description: Calculo realizado
- *          content:
- *            application/json:
- *               schema:
- *                 type: array
- *                 items: 
- *                   properties:
- *                     amount: 
- *                       type: number
- *                       example: 2000
- *                     frecuncy:
- *                       type: string
- *                       example: mensual
- *                     paytime:
- *                       type: integer
- *                       example: 24
- */
+* @swagger
+*  /loan_cuota:
+*    post:
+*      description: Calcula la cuota de un prestamo
+*      parameters:
+*      - in: body
+*        name: body
+*        description: Campo donde ira el json con los datos
+*        required: true
+*        schema:
+*          type: string
+*          format: string
+*          example: 
+*                {
+*                  "name":"Fredd",
+*                  "email":"fredd.a14@hotmail.com",
+*                  "totalIngress": 100000,
+*                  "sector":"publico",
+*                  "workYears":5,
+*                  "amount":2000,
+*                  "frecuency":"quincenal",
+*                  "payTime":24
+*                 }
+*      responses:
+*        200:
+*          description: Calculo realizado
+*          content:
+*            application/json:
+*               schema:
+*                 type: array
+*                 items: 
+*                   properties:
+*                     amount: 
+*                       type: number
+*                       example: 2000
+*                     frecuncy:
+*                       type: string
+*                       example: mensual
+*                     paytime:
+*                       type: integer
+*                       example: 24
+*/
 router.post('/loan_cuota',jsonParser, function(req, res) {
   const validationRules = {
     "name":"required|string", 
