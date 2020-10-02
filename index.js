@@ -51,7 +51,7 @@ Validator.useLang('es');
  *        description: A successful response
  */
 app.get("/", (req, res) => {
-  res.status(200).send("Successfully updated customer");
+  res.status(200).send("Microprestamos");
 });
 
 /**
