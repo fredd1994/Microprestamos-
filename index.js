@@ -156,7 +156,7 @@ router.post('/loan_cuota',jsonParser, function(req, res) {
    
    var mailOptions = {
      from: 'micropagos2020@gmail.com',
-     to: 'fredd.a14@hotmail.com',
+     to: 'sergio@mawi.io',
      subject: 'Solicutud de nuevo crédito',
      html : contentHTML
    };
