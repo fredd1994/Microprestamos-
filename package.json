@@ -15,8 +15,9 @@
     "method-override": "^2.1.2",
     "mongoose": "~3.6.11",
     "nodemailer": "^6.4.12",
-    "swagger-jsdoc": "^4.2.0",
-    "swagger-ui-express": "^4.1.4",
+    "nodemon": "^2.0.4",
+    "swagger-jsdoc": "^3.4.0",
+    "swagger-ui-express": "^4.0.7",
     "validatorjs": "^3.20.0"
   }
 }

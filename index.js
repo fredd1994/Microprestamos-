@@ -2,9 +2,10 @@
     app = express(),
     bodyParser  = require("body-parser"),
     methodOverride = require("method-override"),
-    http = require(`http`),
     Validator = require('validatorjs'),
-    nodemailer = require('nodemailer');
+    nodemailer = require('nodemailer'),
+    swaggerJsDoc = require("swagger-jsdoc");
+    swaggerUi = require("swagger-ui-express");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -13,27 +14,29 @@ app.use(methodOverride());
 const router = express.Router();
 const jsonParser = bodyParser.json();
 const port = process.env.PORT || 8080;
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
-const swaggerObtions ={
-  swaggerDefinition:{
-    info:{
+
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      version: "1.0.0",
       title: "Microprestamos api",
-      description:  "API para calcular la cuota de un microprestamo que un cliente quiere solicitar y debe pagar mensualmente/quincenalmente .",
+      description: "API para calcular la cuota de un microprestamo que un cliente quiere solicitar y debe pagar mensualmente/quincenalmente.",
       contact: {
-        name: "Fredd",
-        url : "No",
-        email: "fredd.a14@hotmail.com"
+        name: "Fredd Alvarez Acuña"
       },
-      servers: ["https://microprestamos.herokuapp.com/"]
+      servers: [
+        "http://localhost:8080", 
+        "https://microprestamos.herokuapp.com/"
+      ]
       
     }
   },
+  // ['.routes/*.js']
   apis: ["index.js"]
-}
+};
 
-const swaggerDocs = swaggerJsDoc(swaggerObtions);
-app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 Validator.useLang('es');
 
@@ -47,8 +50,8 @@ Validator.useLang('es');
  *      '200':
  *        description: A successful response
  */
-router.get('/', function(req, res) {
-  res.status(200).send("Calcular cuota");
+app.get("/", (req, res) => {
+  res.status(200).send("Successfully updated customer");
 });
 
 router.post('/loan_cuota',jsonParser, function(req, res) {
@@ -125,24 +128,15 @@ router.post('/loan_cuota',jsonParser, function(req, res) {
   } else {
 
     var output = validation.errors;
-  } 
-
-
-  
-
-
+  }
   res.send(output);
 });
-
-
-
 
 app.use(router);
 
 app.listen(port, function() {
   console.log("Node server running on http://localhost:3000");
 });
-
 
 function calculate_loan_quota(amount, rate, totalTerm, frecuency) {
   var interest = parseFloat(rate) / 100 / 12;
